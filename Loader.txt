@@ -113,18 +113,20 @@ end
 Screen()
 task.wait(3)
 
+local StarterGui = game:GetService("StarterGui")
 local function notify(title, text)
     StarterGui:SetCore("SendNotification", {
-        Title = title,
-        Text = text,
+        Title = title;
+        Text = text;
         Duration = 5,
     })
 end
-
 if game.PlaceId == 126509999114328 then
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/ReviewCardex/ArvoRevisionedNew/refs/heads/main/99nights.lua'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ReviewCardex/ArvoRevisionedNew/refs/heads/main/99nights.lua'))()
+elseif game.PlaceId == 109983668079237 or game.PlaceId == 96342491571673 then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ReviewCardex/ArvoRevisionedNew/refs/heads/main/StealaBrain.lua"))()
 elseif game.PlaceId == 79546208627805 then
-    notify("Error Bruh", "Do not load at the lobby")
+notify("Error Bruh","Do not load at the lobby")
 else
-    notify("bruh", "Unsupported")
+notify("bruh","Unsupported")
 end
