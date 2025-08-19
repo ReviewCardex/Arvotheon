@@ -17,46 +17,6 @@ if not isfile(fileName) then
     writefile(fileName, game:HttpGet(fileUrl))
 end
 
-local gui = Instance.new("ScreenGui")
-gui.IgnoreGuiInset = true
-gui.ZIndexBehavior = Enum.ZIndexBehavior.Global
-gui.DisplayOrder = 999999999
-gui.ResetOnSpawn = false
-
-if syn and syn.protect_gui then
-    syn.protect_gui(gui)
-    gui.Parent = CoreGui
-else
-    gui.Parent = CoreGui
-end
-
-local button = Instance.new("ImageButton")
-button.Size = UDim2.new(0, 90, 0, 90)
-button.Position = UDim2.new(0.5, -45, 0.5, -45)
-button.BackgroundTransparency = 0
-button.BackgroundColor3 = Color3.fromRGB(30,30,30)
-button.Image = getcustomasset(fileName)
-button.ZIndex = 999999999
-button.Draggable = true
-button.Active = true
-button.Selectable = false
-button.Parent = gui
-
-local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 18)
-corner.Parent = button
-
-local enabled = false
-button.MouseButton1Click:Connect(function()
-    enabled = not enabled
-    if enabled then
-        button.BackgroundColor3 = Color3.fromRGB(60, 200, 60)
-        VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.H, false, game)
-    else
-        button.BackgroundColor3 = Color3.fromRGB(30,30,30)
-        VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.H, false, game)
-    end
-end)
 
 local function Screen()
 	local blur = Instance.new("BlurEffect")
