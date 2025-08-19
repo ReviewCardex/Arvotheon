@@ -10,14 +10,6 @@ local keyFile = "key.txt"
 local CoreGui = game:GetService("CoreGui")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 
-local fileName = "Atoggle.png"
-local fileUrl = "https://github.com/CommonSense12/Gagi/blob/main/New%20Project%2032%20%5B974E3BC%5D.png?raw=true"
-
-if not isfile(fileName) then
-    writefile(fileName, game:HttpGet(fileUrl))
-end
-
-
 local function Screen()
 	local blur = Instance.new("BlurEffect")
 	blur.Size = 0
