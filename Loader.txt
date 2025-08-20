@@ -10,6 +10,100 @@ local keyFile = "key.txt"
 local CoreGui = game:GetService("CoreGui")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 
+local ScreenGui = Instance.new("ScreenGui", gethui())
+local Blur = Instance.new("BlurEffect", game.Lighting)
+local Frame = Instance.new("Frame", ScreenGui)
+local UICorner = Instance.new("UICorner", Frame)
+local Title = Instance.new("TextLabel", Frame)
+local Subtitle = Instance.new("TextLabel", Frame)
+local Description = Instance.new("TextLabel", Frame)
+local JoinButton = Instance.new("TextButton", Frame)
+local CloseButton = Instance.new("TextButton", Frame)
+local JoinCorner = Instance.new("UICorner", JoinButton)
+local CloseCorner = Instance.new("UICorner", CloseButton)
+
+ScreenGui.IgnoreGuiInset = true
+Blur.Size = 0
+
+Frame.AnchorPoint = Vector2.new(0.5,0.5)
+Frame.Position = UDim2.new(0.5,0,0.5,0)
+Frame.Size = UDim2.new(0,0,0,0)
+Frame.BackgroundColor3 = Color3.fromRGB(25,25,25)
+Frame.BackgroundTransparency = 0.1
+UICorner.CornerRadius = UDim.new(0,18)
+
+Title.Text = "Join Our Discord"
+Title.Size = UDim2.new(1,0,0,55)
+Title.Position = UDim2.new(0,0,0,10)
+Title.BackgroundTransparency = 1
+Title.TextColor3 = Color3.fromRGB(255,255,255)
+Title.Font = Enum.Font.GothamBold
+Title.TextScaled = true
+
+Subtitle.Text = "discord.gg/arvotheon"
+Subtitle.Size = UDim2.new(1,0,0,35)
+Subtitle.Position = UDim2.new(0,0,0,65)
+Subtitle.BackgroundTransparency = 1
+Subtitle.TextColor3 = Color3.fromRGB(200,200,200)
+Subtitle.Font = Enum.Font.Gotham
+Subtitle.TextScaled = true
+
+Description.Text = "Join our discord for the best experience and more OP Scripts!"
+Description.Size = UDim2.new(1,-40,0,70)
+Description.Position = UDim2.new(0,20,0,110)
+Description.BackgroundTransparency = 1
+Description.TextColor3 = Color3.fromRGB(180,180,180)
+Description.Font = Enum.Font.Gotham
+Description.TextWrapped = true
+Description.TextScaled = true
+
+JoinButton.Text = "Join Discord"
+JoinButton.Size = UDim2.new(0.4,0,0,55)
+JoinButton.Position = UDim2.new(0.08,0,1,-75)
+JoinButton.BackgroundColor3 = Color3.fromRGB(240,240,240)
+JoinButton.TextColor3 = Color3.fromRGB(20,20,20)
+JoinButton.Font = Enum.Font.Gotham
+JoinButton.TextScaled = true
+JoinCorner.CornerRadius = UDim.new(0,12)
+
+CloseButton.Text = "Close"
+CloseButton.Size = UDim2.new(0.4,0,0,55)
+CloseButton.Position = UDim2.new(0.52,0,1,-75)
+CloseButton.BackgroundColor3 = Color3.fromRGB(240,240,240)
+CloseButton.TextColor3 = Color3.fromRGB(20,20,20)
+CloseButton.Font = Enum.Font.Gotham
+CloseButton.TextScaled = true
+CloseCorner.CornerRadius = UDim.new(0,12)
+
+TweenService:Create(Frame, TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0,600,0,280)}):Play()
+TweenService:Create(Blur, TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = 20}):Play()
+
+local function Hover(button, base, hover)
+    button.MouseEnter:Connect(function()
+        TweenService:Create(button, TweenInfo.new(0.25, Enum.EasingStyle.Quad), {BackgroundColor3 = hover}):Play()
+    end)
+    button.MouseLeave:Connect(function()
+        TweenService:Create(button, TweenInfo.new(0.25, Enum.EasingStyle.Quad), {BackgroundColor3 = base}):Play()
+    end)
+end
+
+Hover(JoinButton, Color3.fromRGB(240,240,240), Color3.fromRGB(255,255,255))
+Hover(CloseButton, Color3.fromRGB(240,240,240), Color3.fromRGB(255,255,255))
+
+JoinButton.MouseButton1Click:Connect(function()
+    setclipboard("https://discord.gg/arvotheon")
+end)
+
+CloseButton.MouseButton1Click:Connect(function()
+    local tween1 = TweenService:Create(Frame, TweenInfo.new(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {Size = UDim2.new(0,0,0,0)})
+    local tween2 = TweenService:Create(Blur, TweenInfo.new(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {Size = 0})
+    tween1:Play()
+    tween2:Play()
+    tween1.Completed:Wait()
+    Blur:Destroy()
+    ScreenGui:Destroy()
+end)
+
 local function Screen()
 	local blur = Instance.new("BlurEffect")
 	blur.Size = 0
